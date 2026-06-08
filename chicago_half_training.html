@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chicago Life Half Marathon — Sub-1:30 Training Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#F7F3EE;
+  --surface:#FFFFFF;
+  --surface2:#F2EDE6;
+  --dark:#17120A;
+  --mid:#4A3A28;
+  --muted:#7A6A58;
+  --border:#E4D9CC;
+  --orange:#C85A0A;
+  --orange-light:#FAE8D6;
+  --orange-mid:#E8854A;
+  --teal:#0D6E5A;
+  --teal-light:#DFF2EC;
+  --blue:#1A5490;
+  --blue-light:#E2EEF8;
+  --red:#A32D2D;
+  --red-light:#FCEBEB;
+  --green:#3B6D11;
+  --green-light:#EAF3DE;
+  --amber:#7A4A0A;
+  --amber-light:#FDF0D8;
+  --purple:#534AB7;
+  --purple-light:#EEEDFE;
+  --gold:#C8960A;
+}
+
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);font-size:16px;line-height:1.6;min-height:100vh;}
+
+/* ── PRINT BUTTON ── */
+.print-btn{position:fixed;bottom:24px;right:24px;z-index:999;background:var(--dark);color:#F7F3EE;border:none;border-radius:50px;padding:12px 22px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.25);transition:transform 0.15s,background 0.15s;}
+.print-btn:hover{background:var(--orange);transform:translateY(-2px);}
+.print-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* ── HERO ── */
+.hero{background:var(--dark);color:#F7F3EE;padding:4rem 2rem 3rem;position:relative;overflow:hidden;}
+.hero-inner{max-width:900px;margin:0 auto;}
+.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;border:60px solid rgba(200,90,10,0.12);}
+.hero::after{content:'';position:absolute;right:100px;bottom:-100px;width:200px;height:200px;border-radius:50%;border:40px solid rgba(200,90,10,0.07);}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange-mid);margin-bottom:0.75rem;display:flex;align-items:center;gap:10px;}
+.hero-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--orange-mid);}
+.hero-title{font-family:'Fraunces',serif;font-size:clamp(32px,6vw,52px);font-weight:900;line-height:1.1;margin-bottom:0.5rem;}
+.hero-title span{color:var(--orange-mid);}
+.hero-subtitle{font-family:'DM Mono',monospace;font-size:13px;color:#9A8878;margin-bottom:2.5rem;letter-spacing:0.05em;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;max-width:520px;}
+.hero-stat{background:rgba(255,255,255,0.04);padding:1.1rem 1rem;text-align:center;}
+.hero-stat-val{font-family:'Fraunces',serif;font-size:26px;font-weight:700;color:var(--orange-mid);line-height:1;}
+.hero-stat-lab{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#7A6A58;text-transform:uppercase;margin-top:4px;}
+
+/* ── NAV TABS ── */
+.nav{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 1px 8px rgba(0,0,0,0.06);}
+.nav-inner{max-width:900px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-tab{padding:1rem 1.5rem;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color 0.2s,border-color 0.2s;user-select:none;flex-shrink:0;text-decoration:none;display:block;}
+.nav-tab:hover{color:var(--dark);}
+.nav-tab.active{color:var(--orange);border-bottom-color:var(--orange);}
+
+/* ── MAIN CONTENT ── */
+.main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem;}
+.section{display:none;}
+.section.active{display:block;}
+
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
+.section-title{font-family:'Fraunces',serif;font-size:28px;font-weight:700;color:var(--dark);margin-bottom:0.4rem;}
+.section-desc{color:var(--muted);font-size:15px;margin-bottom:2rem;max-width:600px;}
+
+/* ── PACE CARDS ── */
+.pace-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:2rem;}
+.pace-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem;}
+.pace-card.featured{background:var(--orange-light);border-color:var(--orange-mid);}
+.pace-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.pace-card.featured .pace-label{color:var(--orange);}
+.pace-val{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--dark);line-height:1.1;}
+.pace-card.featured .pace-val{color:var(--orange);}
+.pace-note{font-size:12px;color:var(--muted);margin-top:4px;}
+
+/* ── INFO BOXES ── */
+.info-box{border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1rem;}
+.info-box.teal{background:var(--teal-light);border:1px solid #9FD9CB;}
+.info-box.amber{background:var(--amber-light);border:1px solid #F5C87A;}
+.info-box.blue{background:var(--blue-light);border:1px solid #B0CCE8;}
+.info-box.orange{background:var(--orange-light);border:1px solid var(--orange-mid);}
+.info-box h4{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.6rem;}
+.info-box.teal h4{color:var(--teal);}
+.info-box.amber h4{color:var(--amber);}
+.info-box.blue h4{color:var(--blue);}
+.info-box.orange h4{color:var(--orange);}
+.info-box p,.info-box li{font-size:14px;color:var(--dark);}
+.info-box ul{padding-left:1.2rem;}
+.info-box li{margin-bottom:4px;}
+.info-box strong{font-weight:500;}
+
+/* ── PHASE BAR ── */
+.phase-bar-wrap{margin-bottom:2rem;}
+.phase-bar{display:flex;border-radius:8px;overflow:hidden;height:32px;gap:2px;}
+.phase-seg{display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:opacity 0.15s;}
+.phase-seg:hover{opacity:0.8;}
+.phase-legend{display:flex;gap:1rem;margin-top:10px;flex-wrap:wrap;}
+.phase-dot{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+.phase-dot span{width:10px;height:10px;border-radius:2px;display:block;}
+
+/* ── WEEK CARDS ── */
+.weeks{display:flex;flex-direction:column;gap:10px;}
+.week-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:box-shadow 0.2s;}
+.week-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.week-header{display:flex;align-items:center;gap:0.75rem;padding:1rem 1.25rem;cursor:pointer;user-select:none;}
+.week-num-badge{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:52px;}
+.week-title-wrap{flex:1;}
+.week-name{font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--dark);line-height:1.2;}
+.week-dates{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:1px;}
+.week-right{display:flex;align-items:center;gap:10px;}
+.phase-badge{font-family:'DM Mono',monospace;font-size:9px;padding:3px 9px;border-radius:20px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;white-space:nowrap;}
+.badge-base{background:var(--blue-light);color:var(--blue);}
+.badge-build{background:var(--green-light);color:var(--green);}
+.badge-race{background:var(--orange-light);color:var(--orange);}
+.badge-recovery{background:var(--purple-light);color:var(--purple);}
+.badge-taper{background:var(--amber-light);color:var(--amber);}
+.week-miles{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--dark);white-space:nowrap;}
+.week-chevron{width:18px;height:18px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;transition:transform 0.25s;flex-shrink:0;}
+.week-chevron svg{width:10px;height:10px;stroke:var(--muted);fill:none;stroke-width:2.5;}
+.week-card.open .week-chevron{transform:rotate(180deg);}
+.week-body{display:none;padding:0 1.25rem 1.25rem;border-top:1px solid var(--border);}
+.week-card.open .week-body{display:block;}
+
+/* ── COMPLETION CHECK ── */
+.week-progress{display:flex;gap:4px;padding:0.75rem 0 0.5rem;flex-wrap:wrap;}
+.check-dot{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+.check-dot.done{background:var(--teal);border-color:var(--teal);}
+.check-dot.done svg{display:block;}
+.check-dot svg{display:none;width:10px;height:10px;stroke:#fff;fill:none;stroke-width:3;}
+.progress-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:0.75rem;}
+.progress-bar-track{flex:1;height:3px;background:var(--border);border-radius:2px;max-width:120px;}
+.progress-bar-fill{height:100%;background:var(--teal);border-radius:2px;transition:width 0.3s;}
+
+/* ── DAY ROWS ── */
+.day-rows{display:flex;flex-direction:column;gap:0;}
+.day-row{display:grid;grid-template-columns:80px 1fr;gap:0.75rem;padding:0.7rem 0;border-bottom:1px solid var(--border);align-items:start;}
+.day-row:last-child{border-bottom:none;}
+.day-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding-top:3px;}
+.day-content{}
+.workout-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:9px;padding:2px 8px;border-radius:4px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;}
+.tag-track{background:var(--red-light);color:var(--red);}
+.tag-tempo{background:var(--orange-light);color:var(--orange);}
+.tag-easy{background:var(--green-light);color:var(--green);}
+.tag-long{background:var(--blue-light);color:var(--blue);}
+.tag-strength{background:var(--purple-light);color:var(--purple);}
+.tag-rest{background:var(--surface2);color:var(--muted);}
+.tag-progression{background:var(--teal-light);color:var(--teal);}
+.tag-race{background:var(--dark);color:var(--orange-mid);}
+.workout-title{font-size:14px;font-weight:500;color:var(--dark);margin-bottom:3px;}
+.workout-detail{font-size:13px;color:var(--mid);line-height:1.55;}
+.workout-purpose{font-size:12px;color:var(--teal);font-style:italic;margin-top:4px;}
+
+/* ── STRENGTH ── */
+.strength-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.strength-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;}
+.strength-card h3{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;}
+.strength-list{list-style:none;}
+.strength-list li{font-size:13px;color:var(--dark);padding:6px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.strength-list li:last-child{border-bottom:none;}
+.s-sets{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
+
+/* ── RACE STRATEGY ── */
+.race-hero{background:var(--dark);border-radius:14px;padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.race-hero::after{content:'1:29:30';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Fraunces',serif;font-size:100px;font-weight:900;color:rgba(255,255,255,0.03);white-space:nowrap;pointer-events:none;}
+.race-hero h3{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--orange-mid);margin-bottom:0.25rem;}
+.race-hero p{font-size:13px;color:#7A6A58;margin-bottom:1.5rem;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
+.splits{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.split{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.85rem;}
+.split-miles{font-family:'DM Mono',monospace;font-size:10px;color:#7A6A58;margin-bottom:4px;}
+.split-pace{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:#F7F3EE;line-height:1;}
+.split-note{font-size:11px;color:#5A4A3A;margin-top:4px;}
+
+/* ── PROGRESS RING ── */
+.overall-progress{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:2rem;display:flex;align-items:center;gap:1.5rem;}
+.ring-wrap{flex-shrink:0;}
+.ring-wrap svg{overflow:visible;}
+.ring-text{font-family:'Fraunces',serif;font-size:18px;font-weight:700;fill:var(--dark);}
+.ring-sub{font-family:'DM Mono',monospace;font-size:8px;fill:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
+.progress-info{}
+.progress-info h4{font-family:'Fraunces',serif;font-size:17px;font-weight:700;margin-bottom:4px;}
+.progress-info p{font-size:13px;color:var(--muted);}
+.progress-info strong{color:var(--orange);font-weight:500;}
+
+/* ── BENCHMARK CALLOUT ── */
+.benchmark-card{background:linear-gradient(135deg,var(--dark) 0%,#2A1E0E 100%);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:10px;display:flex;align-items:center;gap:1rem;}
+.benchmark-star{font-size:24px;flex-shrink:0;}
+.benchmark-info{}
+.benchmark-title{font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--orange-mid);margin-bottom:2px;}
+.benchmark-desc{font-size:13px;color:#7A6A58;}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);color:#5A4A3A;text-align:center;padding:2rem;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;margin-top:4rem;}
+footer strong{color:#7A6A58;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+  .strength-grid{grid-template-columns:1fr;}
+  .splits{grid-template-columns:repeat(2,1fr);}
+  .day-row{grid-template-columns:60px 1fr;}
+  .week-right{gap:6px;}
+  .week-miles{display:none;}
+  .main{padding:1.5rem 1rem;}
+  .hero{padding:2.5rem 1.25rem 2rem;}
+  .print-btn{bottom:16px;right:16px;}
+}
+
+/* ── PRINT ── */
+@media print{
+  .print-btn,.nav{display:none!important;}
+  .section{display:block!important;}
+  .week-body{display:block!important;}
+  .hero{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .week-card{break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">
+  <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Print / Save PDF
+</button>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Elite Half Marathon Training</div>
+    <h1 class="hero-title">Chicago Life<br><span>Half Marathon</span></h1>
+    <p class="hero-subtitle">Sub-1:30:00 Target &nbsp;·&nbsp; Jun 8 – Sep 27, 2026 &nbsp;·&nbsp; 16 Weeks</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-val">16</div><div class="hero-stat-lab">Weeks</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">6:51</div><div class="hero-stat-lab">Goal Pace</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">~40</div><div class="hero-stat-lab">Peak MPW</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">3</div><div class="hero-stat-lab">Benchmarks</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-tab active" onclick="showSection('overview',this)">Overview</a>
+    <a class="nav-tab" onclick="showSection('paces',this)">Paces</a>
+    <a class="nav-tab" onclick="showSection('plan',this)">16-Week Plan</a>
+    <a class="nav-tab" onclick="showSection('strength',this)">Strength</a>
+    <a class="nav-tab" onclick="showSection('race',this)">Race Strategy</a>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ── OVERVIEW ── -->
+<section id="overview" class="section active">
+  <div class="section-eyebrow">Training Plan Overview</div>
+  <div class="section-title">Your Path to Sub-1:30</div>
+  <div class="section-desc">Built from your current fitness. Paced to arrive at sub-1:30 shape — not assume it.</div>
+
+  <div class="overall-progress" id="overall-progress-card">
+    <div class="ring-wrap">
+      <svg width="72" height="72" viewBox="0 0 72 72">
+        <circle cx="36" cy="36" r="28" fill="none" stroke="#E4D9CC" stroke-width="6"/>
+        <circle id="ring-circle" cx="36" cy="36" r="28" fill="none" stroke="#C85A0A" stroke-width="6" stroke-linecap="round"
+          stroke-dasharray="175.9" stroke-dashoffset="175.9" transform="rotate(-90 36 36)" style="transition:stroke-dashoffset 0.6s ease;"/>
+        <text x="36" y="34" text-anchor="middle" class="ring-text" id="ring-pct">0%</text>
+        <text x="36" y="46" text-anchor="middle" class="ring-sub">done</text>
+      </svg>
+    </div>
+    <div class="progress-info">
+      <h4 id="progress-title">Plan Not Started</h4>
+      <p id="progress-desc">Check off workouts in the <strong>16-Week Plan</strong> tab to track your progress here.</p>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:2rem;">
+    <div class="benchmark-card">
+      <div class="benchmark-star">⭐</div>
+      <div class="benchmark-info">
+        <div class="benchmark-title">Week 5 — 5K Time Trial</div>
+        <div class="benchmark-desc">Track time trial. Recalibrates ALL training paces. Most important workout of the cycle.</div>
+      </div>
+    </div>
+    <div class="benchmark-card">
+      <div class="benchmark-star">⭐</div>
+      <div class="benchmark-info">
+        <div class="benchmark-title">Week 9 — 10K Tune-Up Race</div>
+        <div class="benchmark-desc">Race or 4-mile tempo test. Confirms HM goal pace is achievable. Updates threshold zones.</div>
+      </div>
+    </div>
+    <div class="benchmark-card">
+      <div class="benchmark-star">⭐</div>
+      <div class="benchmark-info">
+        <div class="benchmark-title">Week 13 — Final Fitness Check</div>
+        <div class="benchmark-desc">5×1200m @ HM goal pace. If controlled, you're ready to race sub-1:30.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box teal" style="margin-bottom:1rem;">
+    <h4>Phase structure</h4>
+    <ul>
+      <li><strong>Base (Weeks 1–4):</strong> Rebuild aerobic engine from your current 15–20 mpw base. Introduce threshold and track work carefully.</li>
+      <li><strong>Build (Weeks 5–9):</strong> VO2max intervals, longer tempos, two fitness benchmarks. This is where sub-1:30 fitness is made.</li>
+      <li><strong>Race-Specific (Weeks 10–13):</strong> HM-pace intervals, long threshold runs, 15-mile peak long run. Simulate race conditions.</li>
+      <li><strong>Taper (Weeks 14–16):</strong> Reduce volume, preserve intensity. Arrive at the start line fresh and sharp.</li>
+    </ul>
+  </div>
+
+  <div class="info-box amber">
+    <h4>About your paces</h4>
+    <p>Starting paces are intentionally conservative — built from your 1:37 half, 3:55 marathon, and 20:10 5K. You are not expected to run at goal HM pace in training until late in the plan. After the Week 5 time trial, adjust all zones. The training works if the easy runs are truly easy.</p>
+  </div>
+</section>
+
+<!-- ── PACES ── -->
+<section id="paces" class="section">
+  <div class="section-eyebrow">Training Pace Zones</div>
+  <div class="section-title">Starting Paces</div>
+  <div class="section-desc">Estimated from your 1:37 half, 3:55 marathon, and 20:10 5K. Updated at Week 5 and Week 9 benchmarks.</div>
+
+  <div class="pace-grid">
+    <div class="pace-card"><div class="pace-label">Recovery</div><div class="pace-val">9:30–10:30</div><div class="pace-note">RPE 1–2 · HR &lt;65%</div></div>
+    <div class="pace-card"><div class="pace-label">Easy</div><div class="pace-val">8:45–9:30</div><div class="pace-note">RPE 3–4 · HR 65–72%</div></div>
+    <div class="pace-card"><div class="pace-label">Marathon Pace</div><div class="pace-val">8:30–8:45</div><div class="pace-note">RPE 5 · HR 75–80%</div></div>
+    <div class="pace-card"><div class="pace-label">Threshold</div><div class="pace-val">7:00–7:15</div><div class="pace-note">RPE 7–8 · HR 83–88%</div></div>
+    <div class="pace-card"><div class="pace-label">10K Pace</div><div class="pace-val">7:25–7:35</div><div class="pace-note">RPE 8 · HR 86–90%</div></div>
+    <div class="pace-card"><div class="pace-label">5K Pace</div><div class="pace-val">6:30–6:40</div><div class="pace-note">RPE 9 · HR 90–95%</div></div>
+    <div class="pace-card featured"><div class="pace-label">Goal HM Pace</div><div class="pace-val">6:51/mi</div><div class="pace-note">RPE 8–9 · HR 88–92%</div></div>
+    <div class="pace-card"><div class="pace-label">Mile Pace</div><div class="pace-val">6:00–6:10</div><div class="pace-note">RPE 9–10 · HR 95%+</div></div>
+  </div>
+
+  <div class="info-box teal" style="margin-bottom:1rem;">
+    <h4>Pace update schedule</h4>
+    <ul>
+      <li><strong>Week 5 (5K time trial):</strong> If you run sub-19:30, shift all zones 10–15 sec/mi faster. Sub-19:00 → shift 20+ sec/mi.</li>
+      <li><strong>Week 9 (10K tune-up):</strong> A 10K around 44:00–45:00 confirms sub-1:30 is achievable. Update threshold and HM pace zones.</li>
+      <li><strong>Week 13 (fitness check):</strong> 5×1200m at goal HM pace. If RPE is 7–8 (not 9+), you're ready.</li>
+    </ul>
+  </div>
+
+  <div class="info-box blue" style="margin-bottom:1rem;">
+    <h4>Heart rate guidance</h4>
+    <ul>
+      <li><strong>Easy runs:</strong> Genuinely conversational — full sentences. If you're breathing hard, slow down. HR is a check, not a target.</li>
+      <li><strong>Threshold:</strong> Comfortably hard. You can say 3–4 words, not a sentence. "Controlled discomfort."</li>
+      <li><strong>Intervals:</strong> Hard, mouth-breathing effort. Recovery between reps should drop HR below ~140 bpm.</li>
+      <li><strong>Long runs:</strong> Start at easy pace. Last 20–30% can drift toward marathon pace. Never force it.</li>
+    </ul>
+  </div>
+
+  <div class="info-box amber">
+    <h4>The most important rule</h4>
+    <p>Easy days must be easy. Most runners sabotage their training by running easy days 30–45 sec/mi too fast. If you nail this one habit, the hard days will be harder and the fitness gains will be larger. The easy pace range above is wide on purpose — err toward the slow end, especially early in the plan.</p>
+  </div>
+</section>
+
+<!-- ── 16-WEEK PLAN ── -->
+<section id="plan" class="section">
+  <div class="section-eyebrow">Full Schedule</div>
+  <div class="section-title">16-Week Training Plan</div>
+  <div class="section-desc">Jun 8 – Sep 27, 2026. Click any week to expand. Check off workouts as you complete them.</div>
+
+  <div class="phase-bar-wrap">
+    <div class="phase-bar">
+      <div class="phase-seg" style="width:25%;background:#E2EEF8;color:#1A5490;" onclick="scrollToPhase('base')">Base W1–4</div>
+      <div class="phase-seg" style="width:31.25%;background:#EAF3DE;color:#3B6D11;" onclick="scrollToPhase('build')">Build W5–9</div>
+      <div class="phase-seg" style="width:25%;background:#FAE8D6;color:#C85A0A;" onclick="scrollToPhase('race-spec')">Race-Spec W10–13</div>
+      <div class="phase-seg" style="width:18.75%;background:#FDF0D8;color:#7A4A0A;" onclick="scrollToPhase('taper')">Taper W14–16</div>
+    </div>
+  </div>
+
+  <div class="weeks" id="weeks-container"></div>
+</section>
+
+<!-- ── STRENGTH ── -->
+<section id="strength" class="section">
+  <div class="section-eyebrow">Strength Training</div>
+  <div class="section-title">Two Sessions Per Week</div>
+  <div class="section-desc">Monday (Session A) and Thursday (Session B). 45–55 min each. Reduce load in recovery and taper weeks.</div>
+
+  <div class="strength-grid">
+    <div class="strength-card">
+      <h3>Session A · Monday — Power + Posterior</h3>
+      <ul class="strength-list">
+        <li>Back Squat (or Goblet Squat) <span class="s-sets">3×8 @ 70%</span></li>
+        <li>Romanian Deadlift <span class="s-sets">3×10</span></li>
+        <li>Walking Lunges (weighted) <span class="s-sets">3×12/leg</span></li>
+        <li>Single-Leg Calf Raises <span class="s-sets">3×15/leg</span></li>
+        <li>Side-Lying Hip Abduction <span class="s-sets">2×20/leg</span></li>
+        <li>Dead Bug <span class="s-sets">3×8/side</span></li>
+        <li>Plank (variations) <span class="s-sets">3×40 sec</span></li>
+      </ul>
+    </div>
+    <div class="strength-card">
+      <h3>Session B · Thursday — Stability + Core</h3>
+      <ul class="strength-list">
+        <li>Bulgarian Split Squat <span class="s-sets">3×8/leg</span></li>
+        <li>Single-Leg Romanian Deadlift <span class="s-sets">3×8/leg</span></li>
+        <li>Step-Up w/ Knee Drive <span class="s-sets">3×10/leg</span></li>
+        <li>Lateral Band Walk <span class="s-sets">2×15/dir</span></li>
+        <li>Standing Calf Raises <span class="s-sets">4×20</span></li>
+        <li>Copenhagen Plank <span class="s-sets">3×20 sec/side</span></li>
+        <li>Pallof Press <span class="s-sets">3×10/side</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-box teal" style="margin-bottom:1rem;">
+    <h4>Periodization by phase</h4>
+    <ul>
+      <li><strong>Weeks 1–4 (Base):</strong> 3×10–12 reps, moderate load. Learn the movements, build the foundation. Form over weight.</li>
+      <li><strong>Weeks 5–9 (Build):</strong> 4×6–8 reps, heavier load. Strength phase. Cut squats/RDL to 2 sets in the heaviest running weeks.</li>
+      <li><strong>Weeks 10–13 (Race-Specific):</strong> 3×8, maintain strength. Reduce heavy lower body within 48h of quality runs.</li>
+      <li><strong>Weeks 14–16 (Taper):</strong> 2×6–8, lighter weights. Keep neuromuscular activation without adding fatigue.</li>
+    </ul>
+  </div>
+
+  <div class="info-box amber">
+    <h4>Scheduling rules</h4>
+    <ul>
+      <li>Never do heavy squats or deadlifts the day before a hard track session (Tuesday). If Monday strength is very heavy, shift it to after the easy Wednesday run.</li>
+      <li>Calf raises are non-negotiable every week — the most important injury-prevention exercise for runners. Don't skip them.</li>
+      <li>If you're very sore from lifting, the strength session was too heavy. Back off 10–15% and build more gradually.</li>
+      <li>Hip abduction work (Session A) and Copenhagen planks (Session B) protect against IT band syndrome and hip injuries — keep these even in taper.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── RACE STRATEGY ── -->
+<section id="race" class="section">
+  <div class="section-eyebrow">Race Day Execution</div>
+  <div class="section-title">Sub-1:30 Game Plan</div>
+  <div class="section-desc">Sunday, September 27, 2026. Everything below is the plan you execute, not an option.</div>
+
+  <div class="race-hero">
+    <h3>Target Finish: 1:29:30</h3>
+    <p>6:51/mi average &nbsp;·&nbsp; Negative split execution</p>
+    <div class="splits">
+      <div class="split"><div class="split-miles">Miles 1–2</div><div class="split-pace">7:00–7:05</div><div class="split-note">Hold back hard</div></div>
+      <div class="split"><div class="split-miles">Miles 3–5</div><div class="split-pace">6:52–6:58</div><div class="split-note">Settle in</div></div>
+      <div class="split"><div class="split-miles">Miles 6–8</div><div class="split-pace">6:48–6:52</div><div class="split-note">Find your rhythm</div></div>
+      <div class="split"><div class="split-miles">Miles 9–10</div><div class="split-pace">6:45–6:50</div><div class="split-note">Commit — race begins</div></div>
+      <div class="split"><div class="split-miles">Miles 11–12</div><div class="split-pace">6:40–6:48</div><div class="split-note">Push hard</div></div>
+      <div class="split"><div class="split-miles">Mile 13+</div><div class="split-pace">6:25–6:35</div><div class="split-note">Empty the tank</div></div>
+    </div>
+  </div>
+
+  <div class="info-box amber" style="margin-bottom:1rem;">
+    <h4>Race morning protocol</h4>
+    <ul>
+      <li>Wake 3 hours before gun time. Eat familiar carb meal (oatmeal, banana, toast) — ~400–500 cal.</li>
+      <li>Sip 16–20 oz water over the morning. Stop drinking 30 min before start.</li>
+      <li>Arrive at start 45 min early. 10-min easy jog warm-up + 4×20 sec strides at HM goal pace.</li>
+      <li>Take a gel 15 min before start if using them. Second gel at mile 7. Practice this in training.</li>
+      <li>Nothing new on race day — shoes, socks, nutrition, all tested in long runs beforehand.</li>
+    </ul>
+  </div>
+
+  <div class="info-box teal" style="margin-bottom:1rem;">
+    <h4>Execution keys</h4>
+    <ul>
+      <li>Miles 1–2 will feel easy. That is correct. Resist every urge to speed up. Bank nothing — the race is miles 9–13.</li>
+      <li>Don't watch overall pace — watch current mile pace. React lap by lap. A single 6:35 mile in the first 5 can cost you the race.</li>
+      <li>Miles 9–10 are where sub-1:30 is won or lost. Every successful finish requires a strong 9th mile.</li>
+      <li>If you're 10 seconds ahead of pace at the half (mile 6.55), stay disciplined. Do not accelerate.</li>
+      <li>Use the crowd at miles 12–13. Visualize catching runners ahead. The last mile is mental, not physical.</li>
+    </ul>
+  </div>
+
+  <div class="info-box blue">
+    <h4>Taper week reminders</h4>
+    <ul>
+      <li>Mileage drops ~40% in Week 14, ~50% in Week 15. Legs will feel weird — flat, heavy, or strangely fresh. All normal.</li>
+      <li>Do NOT drop intensity during taper. Keep the short speed sessions. The volume drops, the quality stays.</li>
+      <li>Sleep Thursday–Saturday nights before the race is the single highest-leverage recovery tool available to you.</li>
+      <li>Trust the training. You will arrive at the start line having done the work. Race the plan, not the crowd.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>Chicago Life Half Marathon — Sub-1:30 Training Plan</strong><br>
+  Generated for Pat · June 2026 · 16 Weeks · Peak 40 miles/week
+</footer>
+
+<script>
+// ── DATA ──
+const weeks = [
+  {num:1,dates:"Jun 8–14",name:"Base Week 1 — Aerobic Foundation",phase:"base",miles:"22–24",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A — Power + Posterior",detail:"45 min. Back Squat 3×8 @ 70%, Romanian Deadlift 3×10, Walking Lunges 3×12/leg, Single-Leg Calf Raises 3×15/leg, Hip Abduction 2×20/leg, Dead Bug 3×8/side, Plank 3×40 sec. Focus on form — moderate load.",purpose:"Build running-specific strength foundation from scratch."},
+    {d:"Tuesday",tag:"track",title:"Track — 6×800m @ 5K Pace",detail:"WU: 1.5mi easy jog + 4×100m strides. MAIN: 6×800m @ 5K pace (6:30–6:40/mi) w/ 2:30 standing rest. CD: 1mi easy. Total: ~7mi. RPE 9 on reps.",purpose:"Introduce structured speed. Assess where your fitness actually is right now."},
+    {d:"Wednesday",tag:"easy",title:"Easy Recovery Run — 4 Miles",detail:"4mi @ easy pace (8:45–9:30/mi). Flat terrain. Completely conversational. RPE 3–4. No watch-checking — if it feels easy, it is.",purpose:"Flush Tuesday's session, keep aerobic adaptation moving."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B — Stability + Core",detail:"50 min. Bulgarian Split Squat 3×8/leg, Single-Leg RDL 3×8/leg, Step-Up w/ Knee Drive 3×10/leg, Band Walk 2×15/dir, Calf Raises 4×20, Copenhagen Plank 3×20 sec/side, Pallof Press 3×10/side.",purpose:"Single-leg stability and hip strength — the foundation of running economy."},
+    {d:"Friday",tag:"tempo",title:"Threshold Introduction — 2×15 Min",detail:"WU: 1.5mi easy + 4 drills (leg swings, A-skips, butt kicks, high knees). MAIN: 2×15 min @ threshold (7:00–7:15/mi) w/ 3 min easy float between. CD: 1mi easy. Total: ~7.5mi. RPE 7–8.",purpose:"Build lactate threshold from the ground up. Two shorter reps instead of one long block."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Complete rest or 20–30 min easy walk. No running.",purpose:"48 hours of rest before Sunday long run — do not shortchange this."},
+    {d:"Sunday",tag:"long",title:"Long Run — 10 Miles",detail:"10mi @ easy pace (8:45–9:30/mi). Last mile can trend toward 8:30. RPE 4–5 throughout. Fuel at mile 6 if desired. Practice eating and drinking on the move.",purpose:"Aerobic base building. Comfortable effort the entire way."}
+  ]},
+  {num:2,dates:"Jun 15–21",name:"Base Week 2 — Volume Build",phase:"base",miles:"24–26",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A",detail:"45 min. Increase squat/RDL weight 5–10% from Week 1 if form was clean. Same exercise order.",purpose:"Progressive overload — the fundamental principle of strength training."},
+    {d:"Tuesday",tag:"track",title:"Track — 10×400m @ 5K Pace",detail:"WU: 1.5mi easy + 6×100m strides. MAIN: 10×400m @ 5K pace (6:30–6:40/mi; ~1:38–1:40/rep) w/ 90 sec standing rest. CD: 1.5mi easy. Total: ~7mi. RPE 9.",purpose:"Develop speed and running economy. Short reps at max intensity build leg turnover."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi @ easy pace. Completely conversational. RPE 3. Flat terrain. If yesterday felt hard, slow down.",purpose:"Active recovery, add volume with zero additional stress."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B",detail:"50 min. Push Bulgarian split squats to 3×10/leg this week. Full session.",purpose:"Single-leg power development — directly transfers to running propulsion."},
+    {d:"Friday",tag:"tempo",title:"Continuous Tempo — 4 Miles",detail:"WU: 1.5mi easy + drills. MAIN: 4 miles continuous @ threshold (7:00–7:15/mi). CD: 1mi easy. Total: ~6.5mi. RPE 7–8.",purpose:"Progress from 2×15 min blocks to a continuous 4-mile effort. Harder mentally than physically."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Complete rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Long Run — 11 Miles",detail:"11mi @ 8:45–9:15/mi. Completely easy — don't race it. Eat something at miles 7–8 to practice fueling.",purpose:"Incremental long run progression."}
+  ]},
+  {num:3,dates:"Jun 22–28",name:"Base Week 3 — Aerobic Load",phase:"base",miles:"27–29",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A",detail:"45 min. Same as Week 2 or slight load increase where form allows.",purpose:"Consistent strength foundation."},
+    {d:"Tuesday",tag:"track",title:"Track — 5×1200m @ 10K Pace",detail:"WU: 1.5mi easy + 4×100m strides. MAIN: 5×1200m @ 10K pace (7:25–7:35/mi; ~5:33–5:41/rep) w/ 2:30–3:00 rest. CD: 1mi easy. Total: ~8mi. RPE 8.",purpose:"Longer intervals at 10K effort build aerobic power and lactate threshold from below."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi @ easy pace. RPE 3–4. Flat route.",purpose:"Volume day. Easy effort only."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B",detail:"50 min. Increase calf raise volume to 4×20 this week — important for tendon loading.",purpose:"Calf tendon health — a major injury prevention focus."},
+    {d:"Friday",tag:"tempo",title:"Cruise Intervals — 4×1 Mile @ Threshold",detail:"WU: 1.5mi easy + drills. MAIN: 4×1mi @ threshold (7:00–7:15/mi) w/ 60 sec jog recovery. CD: 1mi easy. Total: ~8mi. RPE 7–8.",purpose:"Classic Daniels cruise intervals — high-volume threshold work with brief recovery."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Complete rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Long Run — 12 Miles",detail:"12mi @ 8:45–9:15/mi. Flat. Easy. Infrastructure not performance. Gel at miles 5 and 9.",purpose:"Building toward peak long run distance."}
+  ]},
+  {num:4,dates:"Jun 29–Jul 5",name:"Recovery Week 1 — Consolidate",phase:"recovery",miles:"18–20",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A (Reduced)",detail:"35 min. Drop 1 set per exercise. Reduce weights 10%. Focus on movement quality, not load.",purpose:"Active recovery — maintain the pattern, reduce the stimulus."},
+    {d:"Tuesday",tag:"track",title:"Easy Track Intervals — 4×800m",detail:"WU: 1mi easy. MAIN: 4×800m @ 10K pace (comfortably hard, not maxing) w/ 3:00 rest. CD: 1mi easy. Total: ~5mi. RPE 7.",purpose:"Recovery week — stay sharp without accumulating fatigue."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 4 Miles",detail:"4mi @ easy/recovery pace. RPE 2–3. Keep it genuinely easy — slower than normal easy if needed.",purpose:"Flush accumulated fatigue from the first three weeks."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B (Reduced)",detail:"35 min. 2×10 each exercise, moderate weight.",purpose:"Maintain strength pattern without adding load."},
+    {d:"Friday",tag:"easy",title:"Easy Run + 4 Pickups",detail:"5mi easy + 4×30 sec accelerations to 5K effort w/ full recovery. RPE stays easy except brief surges.",purpose:"Keep legs feeling snappy without meaningful stress."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Full rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Down Week Long Run — 9–10 Miles",detail:"9–10mi @ comfortable easy pace. If tired, 9 is enough. This is a down week — honor it.",purpose:"Recovery long run — keep volume but give the body what it needs."}
+  ]},
+  {num:5,dates:"Jul 6–12",name:"Build Week 1 — 5K Time Trial ⭐",phase:"build",miles:"25–27",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A — Phase 2 Begins",detail:"50 min. Begin 4×6–8 rep strength phase. Heavier loads than before. Maintain strict form.",purpose:"Strength phase begins — power development to support faster running."},
+    {d:"Tuesday",tag:"track",title:"⭐ 5K TIME TRIAL — Benchmark",detail:"WU: 2mi easy jog + 8×100m strides w/ full recovery, then rest 10 min. MAIN: 3.1mi all-out time trial on track. CD: 1.5mi easy. Total: ~7mi. UPDATE ALL TRAINING PACES AFTER THIS RUN.",purpose:"Critical fitness benchmark. Recalibrates every training zone. Run honestly — not conservatively."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi @ easy pace. Very easy after yesterday's effort. RPE 3.",purpose:"Recovery from time trial effort."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B",detail:"50 min. 4×8 Bulgarian split squats + full session.",purpose:"Strength phase lower body focus."},
+    {d:"Friday",tag:"tempo",title:"Threshold — 5 Miles Continuous",detail:"WU: 1.5mi easy. MAIN: 5 miles @ threshold pace (adjust based on time trial result). CD: 1mi easy. Total: ~7.5mi. RPE 7–8.",purpose:"Longest continuous tempo to date. Tests threshold fitness against your new pace zones."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Long Run — 12–13 Miles",detail:"12–13mi. Start at easy pace, miles 11–13 drift to marathon pace (8:30–8:45). Finish feeling like 2–3 more were possible. Fuel every 45 min.",purpose:"Volume and aerobic durability at the start of the build phase."}
+  ]},
+  {num:6,dates:"Jul 13–19",name:"Build Week 2 — VO2max Introduction",phase:"build",miles:"28–30",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A",detail:"50 min. Increase squat load from Week 5.",purpose:"Strength progression continues."},
+    {d:"Tuesday",tag:"track",title:"Track — 5×1000m @ 5K Pace (VO2max)",detail:"WU: 2mi easy + 6×100m strides. MAIN: 5×1000m @ 5K pace (updated from time trial) w/ 3:00 rest. CD: 1.5mi easy. Total: ~8mi. RPE 9.",purpose:"VO2max development. Hard and controlled — last rep equals first rep."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi easy. RPE 3.",purpose:"Recovery."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B",detail:"50 min. Full session.",purpose:"Stability and core."},
+    {d:"Friday",tag:"progression",title:"Progression Run — 8 Miles",detail:"WU: 1mi easy. MAIN: Miles 1–3 @ easy (8:45–9:30), miles 4–6 @ marathon pace (8:30–8:45), miles 7–8 @ threshold (7:00–7:15). CD: 5 min walk. Total: ~8mi.",purpose:"Simulate race-day negative splits. Train the body to accelerate on progressively tired legs."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Long Run — 13 Miles",detail:"13mi. Miles 1–10 easy, miles 11–13 @ marathon pace (8:30–8:45). Strong finish. Gel at miles 5 and 9.",purpose:"Peak long run volume with marathon pace finish."}
+  ]},
+  {num:7,dates:"Jul 20–26",name:"Build Week 3 — Threshold Development",phase:"build",miles:"29–31",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A",detail:"50 min. Maintain loads from Week 6.",purpose:"Strength maintenance during heavy running week."},
+    {d:"Tuesday",tag:"track",title:"Track — 4×1600m @ 10K Pace",detail:"WU: 1.5mi easy + 6×100m strides. MAIN: 4×1600m @ 10K pace (7:25–7:35/mi) w/ 2:30–3:00 rest. CD: 1.5mi easy. Total: ~9mi. RPE 8.",purpose:"Mile repeats at 10K effort — excellent for race-specific fitness and mental toughness."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi easy. RPE 3–4.",purpose:"Active recovery."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B",detail:"50 min. Full session.",purpose:"Injury prevention and stability."},
+    {d:"Friday",tag:"tempo",title:"Cruise Intervals — 5×1 Mile @ Threshold",detail:"WU: 1.5mi easy + drills. MAIN: 5×1mi @ threshold (7:00–7:15/mi) w/ 60 sec jog recovery. CD: 1mi easy. Total: ~9mi. RPE 7–8.",purpose:"High-volume threshold session — the signature workout of half marathon preparation."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Long Run — 13–14 Miles",detail:"13–14mi. Easy throughout. Optional: last 2 miles at marathon pace.",purpose:"Long run — sustained aerobic volume."}
+  ]},
+  {num:8,dates:"Jul 27–Aug 2",name:"Recovery Week 2 — Absorb Build Phase",phase:"recovery",miles:"20–22",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A (Reduced)",detail:"35 min. Drop to 2×8. Lighter loads.",purpose:"Recovery while maintaining neuromuscular pattern."},
+    {d:"Tuesday",tag:"track",title:"Fartlek — 6 Miles by Feel",detail:"WU: 1mi easy. MAIN: 6mi fartlek — mix 1–3 min surges at 5K effort with equal easy recovery. Don't time it rigidly. Run by feel. CD: included. Total: ~7mi.",purpose:"Recovery week speed work. Stay sharp without rigid structure."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 4 Miles",detail:"4mi @ recovery pace. Flush fatigue.",purpose:"Active recovery."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B (Reduced)",detail:"35 min. Maintain movement patterns.",purpose:"Recovery week — maintain pattern, reduce load."},
+    {d:"Friday",tag:"easy",title:"Easy Run + 6 Strides",detail:"4mi easy + 6×100m strides at end. Full recovery between strides.",purpose:"Keep leg speed, minimal fatigue."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Down Week Long Run — 10 Miles",detail:"10mi @ easy pace. Completely relaxed. Don't watch the pace.",purpose:"Down-week long run — legs recover, aerobic base stays."}
+  ]},
+  {num:9,dates:"Aug 3–9",name:"Build Week 4 — 10K Tune-Up ⭐",phase:"build",miles:"27–29",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A",detail:"50 min. Resume 4×8 loads from Week 7.",purpose:"Return to full strength phase after recovery week."},
+    {d:"Tuesday",tag:"track",title:"⭐ 10K TUNE-UP RACE or 4-Mile Tempo Test",detail:"OPTION A (race): Run a local 10K all-out. OPTION B (track): WU 2mi + 4mi @ max sustainable threshold pace (aim 6:55–7:05/mi) + CD 1.5mi. Use result to update HM goal pace. Target 10K: ~44–45 min.",purpose:"Second major fitness benchmark. Confirms sub-1:30 pace and updates threshold zones."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi @ easy pace. Very easy after race/effort. RPE 3.",purpose:"Recovery from benchmark effort."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B",detail:"50 min. Stability and injury prevention.",purpose:"Injury prevention focus."},
+    {d:"Friday",tag:"tempo",title:"HM Pace Introduction — 3×2 Miles",detail:"WU: 1.5mi easy. MAIN: 3×2mi @ goal HM pace (6:51/mi or updated) w/ 2:30 rest. CD: 1mi easy. Total: ~9mi. RPE 8–9.",purpose:"First extended HM-pace running. This is your goal race effort — hard but manageable."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Long Run — 14 Miles",detail:"14mi. Miles 1–11 easy, miles 12–14 @ marathon pace. Fuel every 40–45 min.",purpose:"Longest long run to date — entering the most demanding phase of training."}
+  ]},
+  {num:10,dates:"Aug 10–16",name:"Race-Specific Week 1 — HM Pace Work",phase:"race-spec",miles:"30–32",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A (Maintain)",detail:"45 min. Maintain loads, no increases. Race-specific phase — don't add new stress.",purpose:"Strength maintenance. Racing-specific phase begins."},
+    {d:"Tuesday",tag:"track",title:"Track — 6×800m @ 5K Pace (VO2max)",detail:"WU: 2mi easy + 6×100m strides. MAIN: 6×800m @ 5K pace w/ 2:00 rest. CD: 1.5mi easy. Total: ~8mi. RPE 9.",purpose:"Keep VO2max ceiling high while HM-specific work dominates Fridays."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi easy. RPE 3.",purpose:"Recovery."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B",detail:"45 min. Hip stability and calf work.",purpose:"Injury prevention — calf and hip focus."},
+    {d:"Friday",tag:"tempo",title:"Long Tempo — 7 Miles @ Threshold",detail:"WU: 1.5mi easy. MAIN: 7 miles @ threshold (6:58–7:10/mi). CD: 1mi easy. Total: ~9.5mi. RPE 7–8.",purpose:"Longest threshold run of the cycle — the structural center of sub-1:30 preparation."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest.",purpose:"Recovery before critical long run."},
+    {d:"Sunday",tag:"long",title:"Long Run — 14 Miles w/ HM Pace Finish",detail:"14mi. Miles 1–9 @ easy (8:45–9:15), miles 10–14 @ goal HM pace (6:51–7:00). HARDEST LONG RUN SO FAR. Dig in at mile 10.",purpose:"Race simulation — 5 miles at goal pace on tired legs builds the specific fitness needed to race sub-1:30."}
+  ]},
+  {num:11,dates:"Aug 17–23",name:"Race-Specific Week 2 — Peak Load",phase:"race-spec",miles:"32–34",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A",detail:"45 min. Maintain strength — no new maxes.",purpose:"Maintain strength in peak week."},
+    {d:"Tuesday",tag:"track",title:"Track — 200/400/600/800/600/400/200m Ladder",detail:"WU: 2mi easy + 4×100m strides. MAIN: 200m, 400m, 600m, 800m, 600m, 400m, 200m — all @ 5K effort. Rest = 2× work time. CD: 1.5mi easy. Total: ~7mi.",purpose:"Ladder workout develops speed variation and leg turnover. Finishing fast builds confidence."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 6 Miles",detail:"6mi easy. Volume day.",purpose:"Volume with zero quality stress."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B",detail:"45 min. No new maxes — pure quality.",purpose:"Injury prevention, maintenance only."},
+    {d:"Friday",tag:"tempo",title:"HM Race-Pace Intervals — 4×2 Miles",detail:"WU: 1.5mi easy. MAIN: 4×2mi @ goal HM pace (6:51/mi) w/ 90 sec rest. CD: 1mi easy. Total: ~11mi. RPE 8–9.",purpose:"Highest-volume race-pace session. 8 miles total at HM pace — this is race-specific fitness."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest. Critical rest before peak long run.",purpose:"Recovery — legs need full 48h."},
+    {d:"Sunday",tag:"long",title:"⭐ Long Run — 15 Miles (PEAK)",detail:"15mi. Miles 1–10 easy, miles 11–14 @ marathon pace (8:20–8:35), mile 15 easy. Fuel every 40 min from mile 4. This is the longest run of the plan.",purpose:"Peak long run — the capstone of endurance training."}
+  ]},
+  {num:12,dates:"Aug 24–30",name:"Recovery Week 3 — Absorb the Peak",phase:"recovery",miles:"22–24",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A (Reduced)",detail:"35 min. 2×8, lighter loads. Peak week is over — body needs to absorb it.",purpose:"Recovery — absorption week after peak."},
+    {d:"Tuesday",tag:"track",title:"Track — 4×1000m Light Intervals",detail:"WU: 1.5mi easy. MAIN: 4×1000m @ 10K pace w/ 2:30 rest. CD: 1mi easy. Total: ~6mi. RPE 8.",purpose:"Maintain sharpness without accumulating fatigue after peak week."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 4 Miles",detail:"4mi recovery pace. Flush peak week fatigue.",purpose:"Active recovery."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B (Reduced)",detail:"35 min. Maintain movement patterns.",purpose:"Maintain pattern, reduce load."},
+    {d:"Friday",tag:"easy",title:"Easy Run + 4 Strides",detail:"4mi easy + 4×100m strides.",purpose:"Keep legs sharp at low effort."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Down Week Long Run — 11 Miles",detail:"11mi easy. Don't push pace. Recovery week long run.",purpose:"Down-week long run — aerobic base maintained while fatigue clears."}
+  ]},
+  {num:13,dates:"Aug 31–Sep 6",name:"Race-Specific Week 3 — Final Fitness Check ⭐",phase:"race-spec",miles:"28–30",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A — Final Big Session",detail:"45 min. Last full session at build-phase intensity. This is the last heavy week before taper.",purpose:"Final big strength week. Taper begins next week."},
+    {d:"Tuesday",tag:"track",title:"⭐ Fitness Check — 5×1200m @ HM Pace",detail:"WU: 2mi easy + 6×100m strides. MAIN: 5×1200m @ goal HM pace (6:51/mi; ~5:09/rep) w/ 90 sec rest. CD: 1.5mi easy. Total: ~9mi. RPE should be 7–8 — if it's 9+, the goal pace needs adjustment.",purpose:"Final pre-taper fitness benchmark. Controlled HM-pace effort confirms race readiness."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi easy.",purpose:"Recovery."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B",detail:"45 min. Full session.",purpose:"Injury prevention."},
+    {d:"Friday",tag:"tempo",title:"Race-Pace Simulation — 2×3 Miles",detail:"WU: 1.5mi easy. MAIN: 2×3mi @ goal HM pace w/ 3:00 rest. CD: 1mi easy. Total: ~9mi. RPE 8–9.",purpose:"Last long race-pace session before taper. Lock in the effort level mentally."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Long Run — 13 Miles w/ Race Simulation",detail:"13mi. Miles 1–3 easy, miles 4–10 @ goal HM pace, miles 11–13 easy. Fuel exactly as planned for race day.",purpose:"Mini race simulation — 7 miles at goal pace mid-run builds race-specific confidence."}
+  ]},
+  {num:14,dates:"Sep 7–13",name:"Taper Week 1 — Begin Fresh",phase:"taper",miles:"22–24",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A (Taper)",detail:"35 min. 2×8, 70% of recent loads. No new stress. Quality over quantity.",purpose:"Neuromuscular activation without fatigue accumulation."},
+    {d:"Tuesday",tag:"track",title:"Track — 5×600m Short Sharpeners",detail:"WU: 1.5mi easy + 6×100m strides. MAIN: 5×600m @ 5K pace w/ 2:00 rest. CD: 1mi easy. Total: ~6mi.",purpose:"Keep speed sharp — short, fast, and controlled. Freshness over fitness."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 4 Miles",detail:"4mi easy. Volume reduction begins.",purpose:"Aerobic maintenance at reduced load."},
+    {d:"Thursday",tag:"strength",title:"Strength Session B (Taper)",detail:"35 min. 2×8, light to moderate.",purpose:"Maintain strength pattern."},
+    {d:"Friday",tag:"tempo",title:"Short Threshold Tune-Up — 2×2 Miles",detail:"WU: 1mi easy. MAIN: 2×2mi @ threshold (6:55–7:05/mi) w/ 2:00 rest. CD: 1mi easy. Total: ~7mi.",purpose:"Keep threshold sharp at meaningfully reduced volume."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest.",purpose:"Recovery."},
+    {d:"Sunday",tag:"long",title:"Taper Long Run — 11 Miles",detail:"11mi. Mostly easy with miles 7–9 @ goal HM pace. Just a reminder run.",purpose:"Last double-digit long run. Controlled and confident."}
+  ]},
+  {num:15,dates:"Sep 14–20",name:"Taper Week 2 — Sharpen",phase:"taper",miles:"16–18",days:[
+    {d:"Monday",tag:"strength",title:"Strength Session A (Light)",detail:"30 min. 2×6, easy loads. No soreness allowed this week.",purpose:"Activation only — zero fatigue tolerated."},
+    {d:"Tuesday",tag:"track",title:"Track — Race Prep Mixed Intervals",detail:"WU: 1.5mi easy. MAIN: 4×400m @ 5K pace, then 3×800m @ HM goal pace, then 2×400m @ 5K pace — full rest (2–3 min) between all. CD: 1mi easy. Total: ~6mi.",purpose:"Mixed-pace workout locks in all race-day effort levels. You should leave feeling sharp, not tired."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 4 Miles",detail:"4mi very easy. Legs may feel flat or heavy — normal taper fatigue. Trust the process.",purpose:"Aerobic maintenance."},
+    {d:"Thursday",tag:"strength",title:"Final Strength Session B",detail:"30 min. 2×6, very light. Last lifting session before race.",purpose:"Final activation session — this is it for strength until after the race."},
+    {d:"Friday",tag:"easy",title:"Easy Shakeout + 4 Strides",detail:"3mi easy + 4×20 sec strides at HM pace. Very light.",purpose:"Shakeout, keep legs activated."},
+    {d:"Saturday",tag:"rest",title:"Rest Day",detail:"Rest. Lay out race gear. Sleep well.",purpose:"Full recovery before final taper week."},
+    {d:"Sunday",tag:"long",title:"Easy Long Run — 8–9 Miles",detail:"8–9mi entirely easy. Last long run. Legs should feel good — if they do, don't push it.",purpose:"Confidence run. Last long run of the plan."}
+  ]},
+  {num:16,dates:"Sep 21–27",name:"Race Week — Execute",phase:"taper",miles:"10–12 + Race",days:[
+    {d:"Monday",tag:"easy",title:"Easy Run — 3 Miles",detail:"3mi easy. RPE 2. Just moving. No lifting this week.",purpose:"Keep blood flowing, zero fatigue."},
+    {d:"Tuesday",tag:"easy",title:"Race-Pace Shakeout",detail:"3mi easy + 4×30 sec @ HM goal pace w/ full recovery. Total: ~3.5mi.",purpose:"Remind legs what race pace feels like — final calibration."},
+    {d:"Wednesday",tag:"easy",title:"Easy Run — 3 Miles",detail:"3mi very easy. Aerobic maintenance only.",purpose:"Keep moving, nothing more."},
+    {d:"Thursday",tag:"rest",title:"Rest — Critical",detail:"Full rest. Stay off feet. Sleep well tonight.",purpose:"Critical recovery. Do not stand all day."},
+    {d:"Friday",tag:"easy",title:"Pre-Race Shakeout — 2 Miles",detail:"2mi very easy + 4×20 sec strides. End by noon. Off feet for the rest of the day.",purpose:"Final activation. No fatigue whatsoever."},
+    {d:"Saturday",tag:"rest",title:"Rest — Race Eve",detail:"Rest. Familiar dinner. Gear ready. In bed by 9:30pm.",purpose:"Final rest. Race day tomorrow."},
+    {d:"Sunday",tag:"race",title:"🏆 CHICAGO LIFE HALF MARATHON",detail:"Race day. Target: 1:29:30. WU: Arrive 45 min early, 10 min easy jog + 4×20 sec strides. Execute the race strategy in the Race Strategy tab. Gel at mile 7. Empty the tank at mile 13.",purpose:"Everything you've trained for. Trust the process. Execute the plan."}
+  ]}
+];
+
+const phaseClass = {base:"badge-base",build:"badge-build","race-spec":"badge-race",recovery:"badge-recovery",taper:"badge-taper"};
+const phaseLabel = {base:"Base",build:"Build","race-spec":"Race-Specific",recovery:"Recovery",taper:"Taper"};
+const tagClass = {track:"tag-track",tempo:"tag-tempo",easy:"tag-easy",long:"tag-long",strength:"tag-strength",rest:"tag-rest",progression:"tag-progression",race:"tag-race"};
+
+// ── BUILD WEEKS ──
+function buildWeeks(){
+  const container = document.getElementById('weeks-container');
+  weeks.forEach((w,wi)=>{
+    const totalDays = w.days.length;
+    const wid = `week-${w.num}`;
+    const card = document.createElement('div');
+    card.className = 'week-card';
+    card.id = wid;
+    card.dataset.phase = w.phase;
+
+    // Header
+    const hdr = document.createElement('div');
+    hdr.className = 'week-header';
+    hdr.innerHTML = `
+      <span class="week-num-badge">Week ${w.num}</span>
+      <div class="week-title-wrap">
+        <div class="week-name">${w.name}</div>
+        <div class="week-dates">${w.dates}</div>
+      </div>
+      <div class="week-right">
+        <span class="phase-badge ${phaseClass[w.phase]}">${phaseLabel[w.phase]}</span>
+        <span class="week-miles">${w.miles} mi</span>
+        <div class="week-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+    `;
+
+    // Body
+    const body = document.createElement('div');
+    body.className = 'week-body';
+
+    // Progress dots
+    const doneKey = `w${w.num}_done`;
+    const savedDone = JSON.parse(localStorage.getItem(doneKey)||'{}');
+
+    const progressRow = document.createElement('div');
+    progressRow.className = 'progress-label';
+    const pbar = document.createElement('div');
+    pbar.className = 'progress-bar-track';
+    const pfill = document.createElement('div');
+    pfill.className = 'progress-bar-fill';
+    pfill.id = `pbar-${w.num}`;
+    pbar.appendChild(pfill);
+    const plabel = document.createElement('span');
+    plabel.id = `plabel-${w.num}`;
+    plabel.textContent = '0 / '+totalDays+' completed';
+    progressRow.appendChild(plabel);
+    progressRow.appendChild(pbar);
+    body.appendChild(progressRow);
+
+    const dotRow = document.createElement('div');
+    dotRow.className = 'week-progress';
+    w.days.forEach((day,di)=>{
+      const dot = document.createElement('div');
+      dot.className = 'check-dot'+(savedDone[di]?' done':'');
+      dot.title = day.d;
+      dot.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
+      dot.addEventListener('click',()=>{
+        const curr = JSON.parse(localStorage.getItem(doneKey)||'{}');
+        curr[di] = !curr[di];
+        localStorage.setItem(doneKey,JSON.stringify(curr));
+        dot.classList.toggle('done', !!curr[di]);
+        updateWeekProgress(w.num, totalDays);
+        updateOverallProgress();
+      });
+      dotRow.appendChild(dot);
+    });
+    body.appendChild(dotRow);
+
+    // Day rows
+    const dayRows = document.createElement('div');
+    dayRows.className = 'day-rows';
+    w.days.forEach(day=>{
+      const row = document.createElement('div');
+      row.className = 'day-row';
+      row.innerHTML = `
+        <div class="day-label">${day.d}</div>
+        <div class="day-content">
+          <span class="workout-tag ${tagClass[day.tag]}">${day.tag}</span>
+          <div class="workout-title">${day.title}</div>
+          <div class="workout-detail">${day.detail}</div>
+          <div class="workout-purpose">${day.purpose}</div>
+        </div>
+      `;
+      dayRows.appendChild(row);
+    });
+    body.appendChild(dayRows);
+
+    hdr.addEventListener('click',()=>{
+      card.classList.toggle('open');
+    });
+
+    card.appendChild(hdr);
+    card.appendChild(body);
+    container.appendChild(card);
+
+    updateWeekProgress(w.num, totalDays);
+  });
+  updateOverallProgress();
+}
+
+function updateWeekProgress(weekNum, total){
+  const doneKey = `w${weekNum}_done`;
+  const saved = JSON.parse(localStorage.getItem(doneKey)||'{}');
+  const count = Object.values(saved).filter(Boolean).length;
+  const pct = total>0?count/total:0;
+  const fill = document.getElementById(`pbar-${weekNum}`);
+  const label = document.getElementById(`plabel-${weekNum}`);
+  if(fill) fill.style.width = (pct*100)+'%';
+  if(label) label.textContent = count+' / '+total+' completed';
+}
+
+function updateOverallProgress(){
+  let totalAll=0, doneAll=0;
+  weeks.forEach(w=>{
+    const doneKey = `w${w.num}_done`;
+    const saved = JSON.parse(localStorage.getItem(doneKey)||'{}');
+    totalAll += w.days.length;
+    doneAll += Object.values(saved).filter(Boolean).length;
+  });
+  const pct = totalAll>0?doneAll/totalAll:0;
+  const circumference = 175.9;
+  const circle = document.getElementById('ring-circle');
+  const ringPct = document.getElementById('ring-pct');
+  const title = document.getElementById('progress-title');
+  const desc = document.getElementById('progress-desc');
+  if(circle) circle.style.strokeDashoffset = circumference*(1-pct);
+  if(ringPct) ringPct.textContent = Math.round(pct*100)+'%';
+  if(pct===0){
+    if(title) title.textContent = 'Plan Not Started';
+    if(desc) desc.innerHTML = 'Check off workouts in the <strong>16-Week Plan</strong> tab to track your progress here.';
+  } else if(pct<0.5){
+    if(title) title.textContent = 'Building Fitness';
+    if(desc) desc.innerHTML = doneAll+' workouts completed. <strong>Keep the consistency going.</strong>';
+  } else if(pct<1){
+    if(title) title.textContent = 'Race Shape Coming';
+    if(desc) desc.innerHTML = doneAll+' workouts done. <strong>The finish line is close.</strong>';
+  } else {
+    if(title) title.textContent = 'Plan Complete!';
+    if(desc) desc.innerHTML = 'All '+totalAll+' workouts completed. <strong>Go run sub-1:30.</strong>';
+  }
+}
+
+// ── TAB SWITCHING ──
+function showSection(id, el){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  const sec = document.getElementById(id);
+  if(sec) sec.classList.add('active');
+  if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── SCROLL TO PHASE ──
+function scrollToPhase(phase){
+  showSection('plan', document.querySelector('.nav-tab:nth-child(3)'));
+  setTimeout(()=>{
+    const el = document.querySelector(`.week-card[data-phase="${phase}"]`);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+
+buildWeeks();
+</script>
+</body>
+</html>
