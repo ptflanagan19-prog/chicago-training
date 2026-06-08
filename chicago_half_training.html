@@ -807,7 +807,7 @@ function getTodayWorkout(){
     const wStart = new Date(w.startDate);
     for(let di=0; di<w.days.length; di++){
       const d = new Date(wStart);
-      d.setDate(wStart.getDate() + di);
+      d.setDate(wStart.getDate() + di + 1);
       const dNorm = new Date(d.getFullYear(), d.getMonth(), d.getDate());
       if(dNorm.getTime() === today.getTime()) return {week:w, dayIdx:di, day:w.days[di]};
     }
