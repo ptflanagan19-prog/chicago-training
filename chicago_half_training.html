@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chicago Life Half Marathon:  Sub 1:30 Training Plan</title>
+<title>Chicago Life Half Marathon — Sub-1:30 Training Plan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -97,11 +96,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);fon
 .acwr-zone{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-top:2px;}
 .acwr-bar{flex:1;height:8px;border-radius:4px;background:linear-gradient(to right,#B0CCE8 0%,#9FD9CB 40%,#F5C87A 70%,#F09595 100%);position:relative;margin-top:8px;}
 .acwr-marker{position:absolute;top:-4px;width:16px;height:16px;border-radius:50%;background:var(--dark);border:2px solid #fff;transform:translateX(-50%);transition:left .4s;}
-
-/* CHARTS */
-.chart-wrap{position:relative;height:200px;margin-top:.75rem;}
-.chart-wrap.tall{height:240px;}
-.chart-empty{display:flex;align-items:center;justify-content:center;height:100%;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;border:1px dashed var(--border);border-radius:8px;}
 
 /* BENCHMARK PANEL */
 .benchmark-panel{background:var(--dark);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
@@ -292,7 +286,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);fon
 <!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow"> Half Marathon Training</div>
+    <div class="hero-eyebrow">Half Marathon Training Plan</div>
     <h1 class="hero-title">Chicago Life<br><span>Half Marathon</span></h1>
     <p class="hero-subtitle">Sub-1:30:00 Target &nbsp;·&nbsp; Jun 8 – Sep 27, 2026 &nbsp;·&nbsp; 16 Weeks</p>
     <div class="hero-bottom">
@@ -417,41 +411,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);fon
       </div>
     </div>
 
-    <!-- Mileage chart -->
-    <div class="overview-card full">
-      <div class="oc-label">Weekly Mileage — Planned vs Actual</div>
-      <div class="chart-wrap tall">
-        <canvas id="mileage-chart"></canvas>
-        <div class="chart-empty" id="mileage-empty">Log actual miles to see this chart</div>
-      </div>
-    </div>
-
-    <!-- Pace delta chart -->
-    <div class="overview-card full">
-      <div class="oc-label">Quality Pace — Suggested vs Actual</div>
-      <div class="chart-wrap tall">
-        <canvas id="pace-chart"></canvas>
-        <div class="chart-empty" id="pace-empty">Log quality workout paces to see this chart</div>
-      </div>
-    </div>
-
-    <!-- Easy pace drift -->
-    <div class="overview-card full">
-      <div class="oc-label">Easy Pace Trend — Aerobic Fitness Indicator</div>
-      <div class="chart-wrap">
-        <canvas id="easy-chart"></canvas>
-        <div class="chart-empty" id="easy-empty">Log easy run paces to see this chart</div>
-      </div>
-    </div>
-
-    <!-- HR trend -->
-    <div class="overview-card full">
-      <div class="oc-label">Average Heart Rate by Workout Type</div>
-      <div class="chart-wrap">
-        <canvas id="hr-chart"></canvas>
-        <div class="chart-empty" id="hr-empty">Log HR data to see this chart</div>
-      </div>
-    </div>
   </div>
 
   <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem;">
@@ -465,7 +424,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);fon
 <section id="paces" class="section">
   <div class="section-eyebrow">Training Pace Zones</div>
   <div class="section-title">Starting Paces</div>
-  <div class="section-desc">Based on your 1:37 half, 3:55 marathon, and 20:10 5K. Enter benchmark results below to auto-update all zones.</div>
+  <div class="section-desc">Updated after Week 1 feedback — threshold and 5K zones adjusted to reflect actual fitness. Goal HM pace unchanged. Enter benchmark results below to further refine.</div>
 
   <!-- BENCHMARK RECALCULATOR -->
   <div class="benchmark-panel">
@@ -487,14 +446,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);fon
 
   <div id="pace-cards-container">
     <div class="pace-grid" id="pace-grid-display">
-      <div class="pace-card"><div class="pace-label">Recovery</div><div class="pace-val" id="p-recovery">9:30–10:30</div><div class="pace-note">RPE 1–2 · HR &lt;65%</div></div>
-      <div class="pace-card"><div class="pace-label">Easy</div><div class="pace-val" id="p-easy">8:45–9:30</div><div class="pace-note">RPE 3–4 · HR 65–72%</div></div>
-      <div class="pace-card"><div class="pace-label">Marathon Pace</div><div class="pace-val" id="p-mp">8:30–8:45</div><div class="pace-note">RPE 5 · HR 75–80%</div></div>
-      <div class="pace-card"><div class="pace-label">Threshold</div><div class="pace-val" id="p-threshold">7:00–7:15</div><div class="pace-note">RPE 7–8 · HR 83–88%</div></div>
-      <div class="pace-card"><div class="pace-label">10K Pace</div><div class="pace-val" id="p-10k">7:25–7:35</div><div class="pace-note">RPE 8 · HR 86–90%</div></div>
-      <div class="pace-card"><div class="pace-label">5K Pace</div><div class="pace-val" id="p-5k">6:30–6:40</div><div class="pace-note">RPE 9 · HR 90–95%</div></div>
+      <div class="pace-card"><div class="pace-label">Recovery</div><div class="pace-val" id="p-recovery">9:45–10:45</div><div class="pace-note">RPE 1–2 · HR &lt;65%</div></div>
+      <div class="pace-card"><div class="pace-label">Easy</div><div class="pace-val" id="p-easy">9:00–9:45</div><div class="pace-note">RPE 3–4 · HR 65–72%</div></div>
+      <div class="pace-card"><div class="pace-label">Marathon Pace</div><div class="pace-val" id="p-mp">8:40–8:55</div><div class="pace-note">RPE 5 · HR 75–80%</div></div>
+      <div class="pace-card"><div class="pace-label">Threshold</div><div class="pace-val" id="p-threshold">7:10–7:25</div><div class="pace-note">RPE 7–8 · HR 83–88%</div></div>
+      <div class="pace-card"><div class="pace-label">10K Pace</div><div class="pace-val" id="p-10k">7:35–7:45</div><div class="pace-note">RPE 8 · HR 86–90%</div></div>
+      <div class="pace-card"><div class="pace-label">5K Pace</div><div class="pace-val" id="p-5k">6:40–6:50</div><div class="pace-note">RPE 9 · HR 90–95%</div></div>
       <div class="pace-card featured"><div class="pace-label">Goal HM Pace</div><div class="pace-val" id="p-hm">6:51/mi</div><div class="pace-note">RPE 8–9 · HR 88–92%</div></div>
-      <div class="pace-card"><div class="pace-label">Mile Pace</div><div class="pace-val" id="p-mile">6:00–6:10</div><div class="pace-note">RPE 9–10 · HR 95%+</div></div>
+      <div class="pace-card"><div class="pace-label">Mile Pace</div><div class="pace-val" id="p-mile">6:10–6:20</div><div class="pace-note">RPE 9–10 · HR 95%+</div></div>
     </div>
   </div>
 
@@ -647,23 +606,23 @@ const weeks = [
     {d:"Sat",tag:"rest",title:"Rest Day",detail:"Complete rest or 20–30 min easy walk",purpose:"48 hrs before long run",suggestedPace:null},
     {d:"Sun",tag:"long",title:"Long Run — 10 Miles",detail:"10mi @ 8:45–9:30/mi · RPE 4–5 · Fuel at mile 6",purpose:"Aerobic base — comfortable effort the entire way",suggestedPace:"9:10"}
   ]},
-  {num:2,dates:"Jun 15–21",startDate:"2026-06-15",name:"Base Week 2 — Volume Build",phase:"base",miles:25,days:[
+  {num:2,dates:"Jun 15–21",startDate:"2026-06-15",name:"Base Week 2 — Volume Build (Adjusted)",phase:"base",miles:25,days:[
     {d:"Mon",tag:"strength",title:"Strength Session A",detail:"45 min · +5–10% load from Week 1 where form allows",purpose:"Progressive overload",suggestedPace:null},
-    {d:"Tue",tag:"track",title:"Track — 10×400m @ 5K Pace",detail:"WU: 1.5mi easy + 6×100m strides · MAIN: 10×400m @ 6:30–6:40/mi (~1:38–1:40/rep) w/ 90sec rest · CD: 1.5mi easy · Total: ~7mi",purpose:"Develop speed and running economy",suggestedPace:"6:35"},
-    {d:"Wed",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi @ 8:45–9:30/mi · RPE 3",purpose:"Active recovery, add volume painlessly",suggestedPace:"9:10"},
+    {d:"Tue",tag:"track",title:"Track — 8×400m @ 5K Pace",detail:"WU: 1.5mi easy + 6×100m strides · MAIN: 8×400m @ 6:40–6:50/mi (~1:40–1:43/rep) w/ 90sec rest · CD: 1.5mi easy · Total: ~6.5mi · NOTE: Reduced from 10×400m — build back up gradually. Heat adjustment: if above 70°F add 20–30 sec/mi to all targets.",purpose:"Develop speed and economy at honest effort — RPE 9 is the target, not the clock",suggestedPace:"6:45"},
+    {d:"Wed",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi @ 9:00–9:45/mi · RPE 3 · Genuinely conversational",purpose:"Active recovery, add volume painlessly",suggestedPace:"9:20"},
     {d:"Thu",tag:"strength",title:"Strength Session B",detail:"50 min · Bulgarian split squats to 3×10/leg",purpose:"Single-leg power development",suggestedPace:null},
-    {d:"Fri",tag:"tempo",title:"Continuous Tempo — 4 Miles",detail:"WU: 1.5mi easy + drills · MAIN: 4mi @ 7:00–7:15/mi · CD: 1mi easy · Total: ~6.5mi",purpose:"Progress to continuous threshold effort",suggestedPace:"7:08"},
+    {d:"Fri",tag:"tempo",title:"Threshold — 2×12 Min @ 7:10–7:25",detail:"WU: 1.5mi easy + drills · MAIN: 2×12min @ 7:10–7:25/mi w/ 3min easy float · CD: 1mi easy · Total: ~6mi · NOTE: Shortened from 4-mile continuous — build from Week 1's actual threshold, not the original estimate. If 7:10–7:15 feels controlled (RPE 7), that's the green light to extend next week.",purpose:"Build threshold from where you actually are — 7:10–7:25 is your real zone right now",suggestedPace:"7:18"},
     {d:"Sat",tag:"rest",title:"Rest Day",detail:"Complete rest",purpose:"Recovery",suggestedPace:null},
-    {d:"Sun",tag:"long",title:"Long Run — 11 Miles",detail:"11mi @ 8:45–9:15/mi · Fuel at miles 7–8",purpose:"Incremental long run progression",suggestedPace:"9:00"}
+    {d:"Sun",tag:"long",title:"Long Run — 11 Miles",detail:"11mi @ 9:00–9:30/mi · Fuel at miles 7–8 · Updated easy pace range",purpose:"Incremental long run progression",suggestedPace:"9:15"}
   ]},
   {num:3,dates:"Jun 22–28",startDate:"2026-06-22",name:"Base Week 3 — Aerobic Load",phase:"base",miles:28,days:[
     {d:"Mon",tag:"strength",title:"Strength Session A",detail:"45 min · Same as Week 2 or slight load increase",purpose:"Consistent strength foundation",suggestedPace:null},
-    {d:"Tue",tag:"track",title:"Track — 5×1200m @ 10K Pace",detail:"WU: 1.5mi easy + 4×100m strides · MAIN: 5×1200m @ 7:25–7:35/mi (~5:33–5:41/rep) w/ 2:30–3:00 rest · CD: 1mi easy · Total: ~8mi",purpose:"Longer intervals at 10K effort build aerobic power",suggestedPace:"7:30"},
-    {d:"Wed",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi @ easy pace · RPE 3–4",purpose:"Volume day",suggestedPace:"9:10"},
+    {d:"Tue",tag:"track",title:"Track — 5×1200m @ 10K Pace",detail:"WU: 1.5mi easy + 4×100m strides · MAIN: 5×1200m @ 7:35–7:45/mi (~5:41–5:49/rep) w/ 2:30–3:00 rest · CD: 1mi easy · Total: ~8mi",purpose:"Longer intervals at 10K effort build aerobic power",suggestedPace:"7:40"},
+    {d:"Wed",tag:"easy",title:"Easy Run — 5 Miles",detail:"5mi @ 9:00–9:45/mi · RPE 3–4",purpose:"Volume day",suggestedPace:"9:20"},
     {d:"Thu",tag:"strength",title:"Strength Session B",detail:"50 min · Calf raises to 4×20",purpose:"Calf tendon loading",suggestedPace:null},
-    {d:"Fri",tag:"tempo",title:"Cruise Intervals — 4×1 Mile @ Threshold",detail:"WU: 1.5mi easy + drills · MAIN: 4×1mi @ 7:00–7:15/mi w/ 60sec jog · CD: 1mi easy · Total: ~8mi",purpose:"Classic cruise intervals — high-volume threshold work",suggestedPace:"7:08"},
+    {d:"Fri",tag:"tempo",title:"Cruise Intervals — 4×1 Mile @ Threshold",detail:"WU: 1.5mi easy + drills · MAIN: 4×1mi @ 7:10–7:25/mi w/ 60sec jog · CD: 1mi easy · Total: ~8mi · If Week 2 Friday felt controlled at 7:10–7:15, aim for the lower end of this range.",purpose:"Classic cruise intervals at your real threshold zone",suggestedPace:"7:18"},
     {d:"Sat",tag:"rest",title:"Rest Day",detail:"Complete rest",purpose:"Recovery",suggestedPace:null},
-    {d:"Sun",tag:"long",title:"Long Run — 12 Miles",detail:"12mi @ 8:45–9:15/mi · Gel at miles 5 and 9",purpose:"Building toward peak long run distance",suggestedPace:"9:00"}
+    {d:"Sun",tag:"long",title:"Long Run — 12 Miles",detail:"12mi @ 9:00–9:30/mi · Gel at miles 5 and 9",purpose:"Building toward peak long run distance",suggestedPace:"9:15"}
   ]},
   {num:4,dates:"Jun 29–Jul 5",startDate:"2026-06-29",name:"Recovery Week 1 — Consolidate",phase:"recovery",miles:19,days:[
     {d:"Mon",tag:"strength",title:"Strength Session A (Reduced)",detail:"35 min · Drop 1 set, reduce weight 10%",purpose:"Active recovery — maintain pattern, reduce load",suggestedPace:null},
@@ -807,7 +766,7 @@ function getTodayWorkout(){
     const wStart = new Date(w.startDate);
     for(let di=0; di<w.days.length; di++){
       const d = new Date(wStart);
-      d.setDate(wStart.getDate() + di + 1);
+      d.setDate(wStart.getDate() + di);
       const dNorm = new Date(d.getFullYear(), d.getMonth(), d.getDate());
       if(dNorm.getTime() === today.getTime()) return {week:w, dayIdx:di, day:w.days[di]};
     }
@@ -900,7 +859,7 @@ window.saveLog = function(){
 
   closeModal();
   buildWeeks();
-  updateCharts();
+  updateACWR();
   updateOverallProgress();
 };
 
@@ -909,7 +868,7 @@ window.deleteLog = function(){
   localStorage.removeItem(currentModalKey);
   closeModal();
   buildWeeks();
-  updateCharts();
+  updateACWR();
   updateOverallProgress();
 };
 
@@ -1217,138 +1176,6 @@ function updateACWR(){
   }
 }
 
-// ── CHARTS ──
-let mileageChart, paceChart, easyChart, hrChart;
-
-function getChartData(){
-  const mileagePlanned=[], mileageActual=[], paceLabels=[], pacesSuggested=[], pacesActual=[];
-  const easyLabels=[], easyPaces=[], hrLabels=[], hrVals=[], hrTags=[];
-
-  weeks.forEach(w=>{
-    // Mileage
-    let actualMiles=0, hasActual=false;
-    w.days.forEach((day,di)=>{
-      if(day.tag==='rest'||day.tag==='strength') return;
-      const log=JSON.parse(localStorage.getItem(`log_w${w.num}_d${di}`)||'null');
-      if(log?.dist){ actualMiles+=log.dist; hasActual=true; }
-    });
-    mileagePlanned.push(w.miles);
-    mileageActual.push(hasActual?parseFloat(actualMiles.toFixed(1)):null);
-
-    // Quality paces + easy paces + HR
-    w.days.forEach((day,di)=>{
-      const log=JSON.parse(localStorage.getItem(`log_w${w.num}_d${di}`)||'null');
-      if(!log?.pace) return;
-      const label=`W${w.num} ${day.d}`;
-      const actualSecs=paceToSecs(log.pace);
-
-      if((day.tag==='track'||day.tag==='tempo'||day.tag==='long'||day.tag==='progression') && day.suggestedPace){
-        const sugSecs=paceToSecs(day.suggestedPace);
-        paceLabels.push(label);
-        pacesSuggested.push(sugSecs?parseFloat((sugSecs/60).toFixed(3)):null);
-        pacesActual.push(actualSecs?parseFloat((actualSecs/60).toFixed(3)):null);
-      }
-      if(day.tag==='easy'){
-        easyLabels.push(label);
-        easyPaces.push(actualSecs?parseFloat((actualSecs/60).toFixed(3)):null);
-      }
-      if(log.hr){
-        hrLabels.push(label);
-        hrVals.push(log.hr);
-        hrTags.push(day.tag);
-      }
-    });
-  });
-
-  return {mileagePlanned,mileageActual,paceLabels,pacesSuggested,pacesActual,easyLabels,easyPaces,hrLabels,hrVals,hrTags};
-}
-
-function fmtPaceAxis(val){
-  const totalSecs=Math.round(val*60);
-  const m=Math.floor(totalSecs/60), s=totalSecs%60;
-  return m+':'+(s<10?'0':'')+s;
-}
-
-function updateCharts(){
-  const {mileagePlanned,mileageActual,paceLabels,pacesSuggested,pacesActual,easyLabels,easyPaces,hrLabels,hrVals,hrTags}=getChartData();
-
-  const hasActualMiles=mileageActual.some(v=>v!==null);
-  const hasPaces=pacesActual.some(v=>v!==null);
-  const hasEasy=easyPaces.some(v=>v!==null);
-  const hasHR=hrVals.length>0;
-
-  const baseFont={family:"'DM Mono',monospace",size:10};
-  const gridColor='rgba(228,217,204,0.8)';
-  const textColor='#7A6A58';
-
-  // MILEAGE
-  document.getElementById('mileage-empty').style.display=hasActualMiles?'none':'flex';
-  if(hasActualMiles){
-    const ctx=document.getElementById('mileage-chart').getContext('2d');
-    if(mileageChart) mileageChart.destroy();
-    mileageChart=new Chart(ctx,{
-      type:'bar',
-      data:{
-        labels:weeks.map(w=>`W${w.num}`),
-        datasets:[
-          {label:'Planned',data:mileagePlanned,backgroundColor:'rgba(228,217,204,0.7)',borderRadius:4,borderSkipped:false},
-          {label:'Actual',data:mileageActual,backgroundColor:'rgba(13,110,90,0.75)',borderRadius:4,borderSkipped:false}
-        ]
-      },
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:baseFont,color:textColor}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.raw+' mi'}}},scales:{x:{grid:{color:gridColor},ticks:{font:baseFont,color:textColor}},y:{grid:{color:gridColor},ticks:{font:baseFont,color:textColor,callback:v=>v+' mi'}}}}
-    });
-  }
-
-  // PACE DELTA
-  document.getElementById('pace-empty').style.display=hasPaces?'none':'flex';
-  if(hasPaces){
-    const ctx2=document.getElementById('pace-chart').getContext('2d');
-    if(paceChart) paceChart.destroy();
-    paceChart=new Chart(ctx2,{
-      type:'line',
-      data:{
-        labels:paceLabels,
-        datasets:[
-          {label:'Suggested',data:pacesSuggested,borderColor:'rgba(228,217,204,1)',backgroundColor:'transparent',borderDash:[4,3],pointRadius:3,tension:0.3},
-          {label:'Actual',data:pacesActual,borderColor:'#C85A0A',backgroundColor:'rgba(200,90,10,0.08)',borderWidth:2,pointRadius:4,pointBackgroundColor:'#C85A0A',tension:0.3,fill:true}
-        ]
-      },
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:baseFont,color:textColor}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmtPaceAxis(c.raw)+'/mi'}}},scales:{x:{grid:{color:gridColor},ticks:{font:baseFont,color:textColor,maxRotation:45}},y:{grid:{color:gridColor},ticks:{font:baseFont,color:textColor,callback:fmtPaceAxis},reverse:true,title:{display:true,text:'min/mi',font:baseFont,color:textColor}}}}
-    });
-  }
-
-  // EASY PACE DRIFT
-  document.getElementById('easy-empty').style.display=hasEasy?'none':'flex';
-  if(hasEasy){
-    const ctx3=document.getElementById('easy-chart').getContext('2d');
-    if(easyChart) easyChart.destroy();
-    easyChart=new Chart(ctx3,{
-      type:'line',
-      data:{
-        labels:easyLabels,
-        datasets:[{label:'Easy Pace',data:easyPaces,borderColor:'#0D6E5A',backgroundColor:'rgba(13,110,90,0.08)',borderWidth:2,pointRadius:4,pointBackgroundColor:'#0D6E5A',tension:0.4,fill:true}]
-      },
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:baseFont,color:textColor}},tooltip:{callbacks:{label:c=>'Easy pace: '+fmtPaceAxis(c.raw)+'/mi'}}},scales:{x:{grid:{color:gridColor},ticks:{font:baseFont,color:textColor,maxRotation:45}},y:{grid:{color:gridColor},ticks:{font:baseFont,color:textColor,callback:fmtPaceAxis},reverse:true,title:{display:true,text:'min/mi (lower = faster)',font:baseFont,color:textColor}}}}
-    });
-  }
-
-  // HR TREND
-  document.getElementById('hr-empty').style.display=hasHR?'none':'flex';
-  if(hasHR){
-    const tagColors={track:'rgba(163,45,45,0.8)',tempo:'rgba(200,90,10,0.8)',easy:'rgba(59,109,17,0.8)',long:'rgba(26,84,144,0.8)',long:'rgba(26,84,144,0.8)',progression:'rgba(13,110,90,0.8)'};
-    const colors=hrTags.map(t=>tagColors[t]||'rgba(122,106,88,0.8)');
-    const ctx4=document.getElementById('hr-chart').getContext('2d');
-    if(hrChart) hrChart.destroy();
-    hrChart=new Chart(ctx4,{
-      type:'bar',
-      data:{labels:hrLabels,datasets:[{label:'Avg HR',data:hrVals,backgroundColor:colors,borderRadius:4,borderSkipped:false}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+' bpm'}}},scales:{x:{grid:{color:gridColor},ticks:{font:baseFont,color:textColor,maxRotation:45}},y:{grid:{color:gridColor},ticks:{font:baseFont,color:textColor,callback:v=>v+' bpm'},min:100}}}
-    });
-  }
-
-  updateACWR();
-}
-
 // ── TAB SWITCHING ──
 window.showSection=function(id,el){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
@@ -1356,7 +1183,7 @@ window.showSection=function(id,el){
   const sec=document.getElementById(id); if(sec) sec.classList.add('active');
   if(el) el.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
-  if(id==='overview') updateCharts();
+  if(id==='overview') updateACWR();
 };
 
 window.scrollToPhase=function(phase){
@@ -1374,7 +1201,7 @@ setupTodayBanner();
 buildWeeks();
 updateOverallProgress();
 restoreBenchmarks();
-updateCharts();
+updateACWR();
 </script>
 </body>
 </html>
